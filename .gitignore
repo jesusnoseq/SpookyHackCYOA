@@ -89,7 +89,9 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
+# I want to upload the build so I can use the same repo to publish a github page 
+# dist
 
 # Gatsby files
 .cache/
