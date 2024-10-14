@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Scene, GameState } from '../types';
+import ImageFrame from './ImageFrame';
+import { useNavigate } from "react-router-dom";
 
 const MS_TO_WAIT_PER_WORD = 50;
 
@@ -10,6 +12,7 @@ interface SceneDisplayProps {
 }
 
 const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceSelect }) => {
+  const navigate = useNavigate();
   const [displayedText, setDisplayedText] = useState('');
   const [isTextComplete, setIsTextComplete] = useState(false);
 
@@ -40,7 +43,6 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
           key={choiceKey}
           className="flex flex-col items-center w-1/3 p-2 bg-gray-500 rounded animate-pulse"
         >
-          <div className="w-full h-32 bg-gray-600 mb-2 rounded" />
           <div className="h-8 w-3/4 bg-gray-600 rounded" />
         </div>
       ))}
@@ -50,11 +52,7 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
 
   return (
     <div className="flex flex-col items-center justify-end min-h-screen text-gray-100 relative">
-      <img
-        src={gameState.backgroundImage}
-        alt="Scene Background"
-        className="w-full h-full object-cover absolute inset-0"
-      />
+      <ImageFrame src={gameState.backgroundImage} alt="Scene Background" />
       <div className="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 p-6">
         <div className="max-w-6xl mx-auto">
           <p className="text-2xl mb-6 min-h-[6rem]">{displayedText}</p>
@@ -69,11 +67,6 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
                   onClick={() => onChoiceSelect(choiceKey as 'a' | 'b')}
                   className="flex flex-col items-center w-1/3 p-2 bg-blue-900 text-white rounded hover:bg-blue-700 transition-colors"
                 >
-                  <img
-                    src={gameState.choiceImages[choiceKey as 'a' | 'b']}
-                    alt={`Choice ${choiceKey.toUpperCase()}`}
-                    className="w-full h-32 object-cover mb-2 rounded"
-                  />
                   <span className="text-2xl">{scene.choices[choiceKey as 'a' | 'b']?.action}</span>
                 </button>
               ))}
@@ -83,12 +76,15 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
             <div className="text-center">
               <p className="text-xl font-bold mb-4">The End</p>
               <button
-                onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                onClick={() => {
+                  navigate('/');
+                }}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors m-1"
               >
                 Play Again
               </button>
             </div>
+
           )}
         </div>
       </div>
