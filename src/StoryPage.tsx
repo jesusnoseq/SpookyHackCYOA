@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import SceneDisplay from './components/SceneDisplay';
 import MysteryForm from './components/MysteryForm';
-import { GameState, Scene } from './types';
+import { GameState, Scene, Story } from './types';
 //import { generateImage, loadNextScene } from './api';
-import { story } from './story';
+
 import { getImageURL } from './api';
 
 interface StoryPageProps {
     imageId: string;
+    story: Story
+    loading: boolean
 }
 
-const StoryPage: React.FC<StoryPageProps> = ({ imageId }) => {
+const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
     const [gameState, setGameState] = useState<GameState>({
         imageId: imageId,
         currentScene: 's1',
@@ -19,7 +21,7 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId }) => {
     });
     const [currentScene, setCurrentScene] = useState<Scene | null>(null);
     const [showMysteryForm, setShowMysteryForm] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(loading);
     const [timeLeft, setTimeLeft] = useState(120); // 2 minutes in seconds
     // const [timerActive, setTimerActive] = useState(false);
 
@@ -30,7 +32,6 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId }) => {
     const loadScene = async (sceneId: string) => {
         setIsLoading(true);
         try {
-            //const scene = await loadNextScene(sceneId, story);
             setCurrentScene(story[sceneId]);
             const bgImage = getImageURL(imageId, sceneId);
             setGameState(prev => ({ ...prev, backgroundImage: bgImage }));

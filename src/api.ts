@@ -8,9 +8,23 @@ export const getImageURL = (id: string, trasnsform: string) => {
   return url;
 }
 
-export const prefecthImage = async (url: string) => {
-  const img = new Image();
-  img.src = url;
+export const prefecthImage = async (url: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+
+    img.onload = () => {
+      console.log(`Imagen cargada: ${url}`);
+      resolve();
+    };
+
+    img.onerror = (error) => {
+      console.error(`Error al cargar la imagen: ${url}`, error);
+      reject(error);
+    };
+
+
+    img.src = url;
+  });
 }
 
 export const uploadImage = async (file: File) => {
