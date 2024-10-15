@@ -41,9 +41,9 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
       {['a', 'b'].map((choiceKey) => (
         <div
           key={choiceKey}
-          className="flex flex-col items-center w-1/3 p-2 bg-gray-500 rounded animate-pulse"
+          className="flex flex-col items-center w-1/3 p-2 bg-gray-600 rounded animate-pulse opacity-70"
         >
-          <div className="h-8 w-3/4 bg-gray-600 rounded" />
+          <div className="h-8 w-3/4 bg-gray-700 rounded opacity-70" />
         </div>
       ))}
     </div>
