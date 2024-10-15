@@ -30,7 +30,7 @@ function App() {
     prefetchImages();
     const timeoutId = setTimeout(() => {
       setLoadingImages(false);
-    }, 60 * 1000);
+    }, 90 * 1000);
     return () => clearTimeout(timeoutId);
   }, [imageId]);
 
