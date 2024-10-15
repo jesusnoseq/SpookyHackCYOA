@@ -8,7 +8,7 @@ export const getImageURL = (id: string, trasnsform: string) => {
   return url;
 }
 
-export const prefecthImage = async (url: string): Promise<void> => {
+export const prefetchImage = async (url: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
 

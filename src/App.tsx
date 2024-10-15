@@ -6,33 +6,40 @@ import Header from './components/Header';
 import GameAudioPlayer from './components/GameAudioPlayer';
 import ScaryBackground from './components/ScaryBackground';
 import { story } from './story';
-import { prefecthImage, getImageURL } from './api';
+import { prefetchImage, getImageURL } from './api';
 
 function App() {
   const [imageId, setImageId] = useState<string | null>(null);
   const [isLoadingImages, setLoadingImages] = useState<boolean>(false);
 
   useEffect(() => {
-    const prefechImages = async () => {
+    const prefetchImages = async () => {
       if (imageId !== null) {
         setLoadingImages(true);
-        for (const key in story) {
-          console.log(key);
-          await prefecthImage(getImageURL(imageId, key));
-        }
+        console.log("Loading stars");
+        const keys = Object.keys(story);
+        const allPromises = keys.map((key) => prefetchImage(getImageURL(imageId, key)));
+        await Promise.all(allPromises.slice(0, 3));
         setLoadingImages(false);
+        console.log("Finished loading the first 3 image");
+        await Promise.all(allPromises);
+        console.log("All images loaded");
       }
     }
 
-    prefechImages();
+    prefetchImages();
+    const timeoutId = setTimeout(() => {
+      setLoadingImages(false);
+    }, 60 * 1000);
+    return () => clearTimeout(timeoutId);
   }, [imageId]);
 
   return (
     <div className="App min-h-screen">
-      <Header />
-      <ScaryBackground />
-      <GameAudioPlayer />
       <Router>
+        <Header />
+        <ScaryBackground />
+        <GameAudioPlayer />
         <Routes>
           <Route path="/" element={<SpookyUpload onUpload={setImageId} />} />
           <Route path="/story" element={<StoryPage loading={isLoadingImages} story={story} imageId={imageId as string} />} />
