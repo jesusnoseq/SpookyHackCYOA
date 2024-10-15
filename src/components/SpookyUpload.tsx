@@ -1,47 +1,66 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Upload, Ghost } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import { uploadImage } from '../api';
 
 interface SpookyUploadProps {
-    onUpload: (id: string) => void;
+    onUpload: (id: string) => void
 }
 
-
-
-const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
+export default function Component({ onUpload }: SpookyUploadProps = { onUpload: () => { } }) {
     const [file, setFile] = useState<File | null>(null)
     const [uploading, setUploading] = useState(false)
     const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const [isDragging, setIsDragging] = useState(false)
     const navigate = useNavigate();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setFile(e.target.files[0]);
-            setError(null);
+            setFile(e.target.files[0])
+            setError(null)
         }
     }
 
+    const handleDrag = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.type === 'dragenter' || e.type === 'dragover') {
+            setIsDragging(true)
+        } else if (e.type === 'dragleave') {
+            setIsDragging(false)
+        }
+    }, [])
+
+    const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsDragging(false)
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            setFile(e.dataTransfer.files[0])
+            setError(null)
+        }
+    }, [])
+
     const uploadToCloudinary = async () => {
         if (!file) {
-            setError('Please select an image');
-            return;
+            setError('Please select an image')
+            return
         }
 
-        setUploading(true);
-        setError(null);
+        setUploading(true)
+        setError(null)
 
         try {
-            const respData = await uploadImage(file);
-            setUploadedUrl(respData.secure_url);
-            const filename = respData.secure_url.split('/').pop();
-            onUpload(filename);
+            const respData = await uploadImage(file)
+            setUploadedUrl(respData.secure_url)
+            const filename = respData.secure_url.split('/').pop()
+            onUpload(filename || '')
         } catch (err) {
-            setError('Failed to upload image. Please try again.');
-            console.error('Upload error:', err);
+            setError('Failed to upload image. Please try again.')
+            console.error('Upload error:', err)
         } finally {
-            setUploading(false);
+            setUploading(false)
         }
     }
 
@@ -52,17 +71,30 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
                     <Ghost className="mr-2" />
                     Upload an image with a face
                 </h2>
-                <input
-                    type="file"
-                    onChange={handleFileChange}
-                    accept="image/*"
-                    disabled={uploading}
-                    className="rounded p-6 w-full mb-4 bg-gray-700 text-gray-100 file:bg-gray-600 file:text-gray-100 file:border-none"
-                />
+                <div
+                    onDragEnter={handleDrag}
+                    onDragLeave={handleDrag}
+                    onDragOver={handleDrag}
+                    onDrop={handleDrop}
+                    className={`border-2 border-dashed rounded-lg p-6 mb-4 text-center cursor-pointer ${isDragging ? 'border-red-500 bg-gray-700' : 'border-gray-600 bg-gray-700'
+                        }`}
+                >
+                    <input
+                        type="file"
+                        onChange={handleFileChange}
+                        accept="image/*"
+                        disabled={uploading}
+                        className="hidden"
+                        id="fileInput"
+                    />
+                    <label htmlFor="fileInput" className="cursor-pointer text-gray-300">
+                        {file ? file.name : 'Drag and drop an image here, or click to select'}
+                    </label>
+                </div>
                 <button
                     onClick={uploadToCloudinary}
                     disabled={!file || uploading}
-                    className="rounded p-2 w-full bg-red-900 hover:bg-red-700 disabled:bg-gray-500  text-white"
+                    className="rounded p-2 w-full bg-red-800 hover:bg-red-700 disabled:bg-red-700 disabled:opacity-50 text-white"
                 >
                     {uploading ? (
                         <span className="flex items-center justify-center">
@@ -74,7 +106,7 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
                         </span>
                     ) : (
                         <span className="flex items-center justify-center">
-                            <Upload className="mr-2 h-4 w-4 p" /> Upload Image
+                            <Upload className="mr-2 h-4 w-4" /> Upload Image
                         </span>
                     )}
                 </button>
@@ -84,9 +116,7 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
                         <p className="text-green-400 mb-2 text-center">Image uploaded successfully!</p>
                         <img src={uploadedUrl} alt="Uploaded image" className="w-full rounded-lg shadow-lg" />
                         <button
-                            onClick={() => {
-                                navigate('/story');
-                            }}
+                            onClick={() => navigate('/story')}
                             className="w-full mt-4 p-4 rounded bg-green-900 hover:bg-green-700 text-white"
                         >
                             Start Your Spooky Journey
@@ -94,8 +124,6 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     )
 }
-
-export default SpookyUpload;
