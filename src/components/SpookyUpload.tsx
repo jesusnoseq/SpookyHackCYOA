@@ -50,7 +50,7 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
             <div className="w-full max-w-lg p-6 bg-gray-800 rounded-lg shadow-xl">
                 <h2 className="text-2xl font-bold mb-4 text-gray-100 flex items-center justify-center">
                     <Ghost className="mr-2" />
-                    Upload an image that represents you
+                    Upload an image with a face
                 </h2>
                 <input
                     type="file"
@@ -62,7 +62,7 @@ const SpookyUpload: React.FC<SpookyUploadProps> = ({ onUpload }) => {
                 <button
                     onClick={uploadToCloudinary}
                     disabled={!file || uploading}
-                    className="rounded p-2 w-full bg-red-900 hover:bg-red-700 text-white"
+                    className="rounded p-2 w-full bg-red-900 hover:bg-red-700 disabled:bg-gray-500  text-white"
                 >
                     {uploading ? (
                         <span className="flex items-center justify-center">
