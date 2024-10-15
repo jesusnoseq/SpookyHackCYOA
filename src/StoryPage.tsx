@@ -65,7 +65,21 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
     };
 
     if (!currentScene) {
-        return <div className="flex items-center justify-center h-screen bg-gray-900 text-gray-100" >Loading...</div>;
+        return <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 p-4">
+            <h1 className="text-2xl font-bold mb-4 animate-fade-in">Loading...</h1>
+            <p className="text-lg text-center max-w-md mb-8 animate-fade-in-delay">
+                We are generating creepy images. <br />It takes time, so feel free to grab some popcorn!
+            </p>
+            <div className="animate-spin mb-8">
+                <svg className="h-16 w-16 text-red-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+            <p className="text-sm text-gray-400 animate-pulse">
+                This might take a few moments...
+            </p>
+        </div>
     }
 
     return (<>
@@ -76,13 +90,6 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
         {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
                 <div className="text-2xl text-white">Loading...</div>
-                <div className="text-2xl text-gray-100">We are generating creepy images, it takes time, you can go get some popcorn</div>
-                <div>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                </div>
 
             </div >
         )}
