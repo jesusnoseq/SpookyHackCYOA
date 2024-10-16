@@ -144,3 +144,5 @@ out
 
 
 *.local
+
+.docs/CNAME
