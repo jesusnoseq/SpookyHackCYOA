@@ -37,7 +37,7 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
   }, [scene.text]);
 
   const renderSkeletonChoices = () => (
-    <div className="flex justify-center space-x-4">
+    <div className="flex justify-center space-x-4 min-h-[5rem]">
       {['a', 'b'].map((choiceKey) => (
         <div
           key={choiceKey}
@@ -55,12 +55,12 @@ const SceneDisplay: React.FC<SceneDisplayProps> = ({ scene, gameState, onChoiceS
       <ImageFrame src={gameState.backgroundImage} alt="Scene Background" />
       <div className="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 p-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-2xl mb-6 min-h-[6rem]">{displayedText}</p>
+          <p className="text-2xl mb-6 min-h-[8rem]">{displayedText}</p>
           {!isTextComplete && Object.keys(scene.choices).length > 0 && (
             renderSkeletonChoices()
           )}
           {isTextComplete && Object.keys(scene.choices).length > 0 && (
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-4 min-h-[5rem]">
               {['a', 'b'].map((choiceKey) => (
                 <button
                   key={choiceKey}
