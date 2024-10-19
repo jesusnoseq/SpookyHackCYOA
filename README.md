@@ -6,7 +6,6 @@ A little game for cloudinary halloween hackaton. I hope you enjoy :hugs:
 
 [spooky.jesusnoseq.com](https://spooky.jesusnoseq.com/)
 
-
 ## What's included
 
 * React App with typescript and tailwind
@@ -40,6 +39,15 @@ I have used AI tools intensively. Here a list
 * [gpt4-o and o1-preview](https://platform.openai.com/playground) story and code
 * [bolt.com](https://bolt.new/) initial project template
 * [v0.dev] additional code
+
+## Some thoughts
+
+* I have overestimated the capacity of the filter to replace cloudinary. I think I am using it for something more complex than it is designed for.
+* This is the first time I make a game based on a story. This kind of game requires more planning than games based on simple fun mechanics as I usually do in game jams.
+* AI tools work well, but don't expect consistency. You can end up with a lot of different styles.
+* The AI filters behavior changed over time. I had more acurate AI changes at first. Parameters that you can't touch, parameters that can change arbitrarily and unknowingly.
+* Cloudinary API is really nice and easy to use, but AI filters need some "finetuning" :stuck_out_tongue_winking_eye:
+* I wanted to work without any component libraries this time, I missed them but with AI tools I can make simple components really fast.
 
 ## More information
 
