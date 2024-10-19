@@ -45,3 +45,24 @@ body {
   content: '|';
   animation: blink 1s infinite;
 }
+
+
+@layer components {
+  .scary-text {
+    @apply text-6xl text-red-500 mb-4 transition-transform duration-1000;
+    filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.7)) drop-shadow(0 0 20px rgba(239, 68, 68, 0.5));
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+  }
+
+  50% {
+    text-shadow: 0 0 15px rgba(239, 68, 68, 1);
+  }
+}
