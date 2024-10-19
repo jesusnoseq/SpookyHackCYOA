@@ -2,6 +2,7 @@ export interface Choice {
   nextScene: string;
   action: string;
   choiceDescription: string;
+  quest?: string
 }
 
 export interface Scene {
