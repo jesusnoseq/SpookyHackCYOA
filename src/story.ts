@@ -14,7 +14,8 @@ export const story: Story =
       "b": {
         "nextScene": "s2b",
         "action": "Ignore it and continue coding",
-        "choiceDescription": "I brush it off as a weird glitch, refocusing on my code and trying to make progress despite the distraction."
+        "choiceDescription": "I brush it off as a weird glitch, refocusing on my code and trying to make progress despite the distraction.",
+        "quest": "Countdown"
       }
     }
   },
@@ -25,12 +26,14 @@ export const story: Story =
       "a": {
         "nextScene": "s3a",
         "action": "Search for the key in the code",
-        "choiceDescription": "I scroll through the code, scanning every function and variable name, convinced there must be a hidden clue in the lines."
+        "choiceDescription": "I scroll through the code, scanning every function and variable name, convinced there must be a hidden clue in the lines.",
+        "quest": "ScrambledCode"
       },
       "b": {
         "nextScene": "s3b",
         "action": "Try to shut down the computer",
-        "choiceDescription": "Feeling uneasy, I try to power off the computer, hoping to shut down whatever is happening."
+        "choiceDescription": "Feeling uneasy, I try to power off the computer, hoping to shut down whatever is happening.",
+        "quest": "Countdown"
       }
     }
   },
@@ -41,7 +44,8 @@ export const story: Story =
       "a": {
         "nextScene": "s3a",
         "action": "Try to debug the code",
-        "choiceDescription": "I focus intensely on the screen, determined to find the bug before the timer hits zero."
+        "choiceDescription": "I focus intensely on the screen, determined to find the bug before the timer hits zero.",
+        "quest": "ScrambledCode"
       },
       "b": {
         "nextScene": "s3b",
@@ -57,7 +61,8 @@ export const story: Story =
       "a": {
         "nextScene": "s4a",
         "action": "Attempt to solve the algorithm",
-        "choiceDescription": "I dive deep into the logic of the algorithm, trying to crack it step-by-step."
+        "choiceDescription": "I dive deep into the logic of the algorithm, trying to crack it step-by-step.",
+        "quest": "MisteryForm"
       },
       "b": {
         "nextScene": "s4b",
@@ -73,7 +78,8 @@ export const story: Story =
       "a": {
         "nextScene": "s4a",
         "action": "Try to solve the algorithm",
-        "choiceDescription": "I pivot my focus to the algorithm on the screen, hoping it's the way out."
+        "choiceDescription": "I pivot my focus to the algorithm on the screen, hoping it's the way out.",
+        "quest": "MisteryForm"
       },
       "b": {
         "nextScene": "s4b",
@@ -92,23 +98,24 @@ export const story: Story =
         "choiceDescription": "I sit back in my chair, exhaling slowly as I process what just happened."
       },
       "b": {
-        "nextScene": "s5b",
+        "nextScene": "s5d",
         "action": "Share the story with colleagues",
         "choiceDescription": "I can’t wait to tell my colleagues about this strange night and see their reactions."
       }
     }
   },
   "s4b": {
-    "text": "You quickly typed a plea for help on an online forum. As responses flooded in, one stood out —a user with the handle 'GhostCoder' provided a cryptic clue: 'Sometimes I use it with a bit of salt.'",
+    "text": "You quickly typed a plea for help on an online forum. As responses flooded in, one stood out —a user with the handle 'GhostCoder' provided a cryptic clue: 'Don't you dare to save raw passwords.'",
     "backgroundTransform": "A programmer's desk with a forum page open and a brightening room.",
     "choices": {
       "a": {
         "nextScene": "s5c",
         "action": "Write the solution based on the clue",
-        "choiceDescription": "I apply the hint to my code, hoping it's the key to unlocking the mystery."
+        "choiceDescription": "I apply the hint to my code, hoping it's the key to unlocking the mystery.",
+        "quest": "MisteryForm"
       },
       "b": {
-        "nextScene": "s5d",
+        "nextScene": "s5b",
         "action": "Panic",
         "choiceDescription": "Feeling overwhelmed, I make a mistake in the code, my heart racing."
       }
@@ -120,8 +127,8 @@ export const story: Story =
     "choices": {}
   },
   "s5b": {
-    "text": "You gathered your colleagues and recounted the night's events. They listened with wide eyes, some skeptical, others intrigued. As you finished your story, you all shared a laugh, but a lingering question remained—was it just a Halloween prank, or something more? The mystery of the ghost in the code would remain unsolved, at least for now.",
-    "backgroundTransform": "An office setting with a group of colleagues gathered around, listening to a story.",
+    "text": "In your panic, you made a critical mistake in the code. The shadowy figure on the screen laughed menacingly as the countdown reached zero. The room went completely dark, and you felt a cold presence enveloping you. You realized too late that you were trapped, just like the entity before you.",
+    "backgroundTransform": "A dark room with a sinister atmosphere, the screen now blank.",
     "choices": {}
   },
   "s5c": {
@@ -134,15 +141,15 @@ export const story: Story =
         "choiceDescription": "I lean back in my chair, feeling satisfied and relieved."
       },
       "b": {
-        "nextScene": "s5b",
+        "nextScene": "s5d",
         "action": "Share the story with colleagues",
         "choiceDescription": "I can’t wait to tell everyone what just happened!"
       }
     }
   },
   "s5d": {
-    "text": "In your panic, you made a critical mistake in the code. The shadowy figure on the screen laughed menacingly as the countdown reached zero. The room went completely dark, and you felt a cold presence enveloping you. You realized too late that you were trapped, just like the entity before you.",
-    "backgroundTransform": "A dark room with a sinister atmosphere, the screen now blank.",
+    "text": "You gathered your colleagues and recounted the night's events. They listened with wide eyes, some skeptical, others intrigued. As you finished your story, you all shared a laugh, but a lingering question remained—was it just a Halloween prank, or something more? The mystery of the ghost in the code would remain unsolved, at least for now.",
+    "backgroundTransform": "An office setting with a group of colleagues gathered around, listening to a story.",
     "choices": {}
   }
 };
