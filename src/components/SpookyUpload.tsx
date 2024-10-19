@@ -87,7 +87,7 @@ export default function Component({ onUpload }: SpookyUploadProps = { onUpload: 
                         className="hidden"
                         id="fileInput"
                     />
-                    <label htmlFor="fileInput" className="cursor-pointer text-gray-300">
+                    <label htmlFor="fileInput" className="cursor-pointer text-gray-300 p-6">
                         {file ? file.name : 'Drag and drop an image here, or click to select'}
                     </label>
                 </div>
