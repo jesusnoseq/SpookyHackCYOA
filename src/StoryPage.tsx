@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SceneDisplay from './components/SceneDisplay';
 import MysteryForm from './components/MysteryForm';
+import ScrambledCode from './components/ScrambledCode';
 import { GameState, Scene, Story } from './types';
-//import { generateImage, loadNextScene } from './api';
+import { usePopup } from './context/PopupContext';
 
 import { getImageURL } from './api';
 
@@ -21,9 +22,12 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
     });
     const [currentScene, setCurrentScene] = useState<Scene | null>(null);
     const [showMysteryForm, setShowMysteryForm] = useState(false);
+    const [showScrambledCode, setShowScrambledCode] = useState(false);
     const [isLoading, setIsLoading] = useState(loading);
-    const [timeLeft, setTimeLeft] = useState(120); // 2 minutes in seconds
-    // const [timerActive, setTimerActive] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(666);
+    const [timerActive, setTimerActive] = useState(false);
+    const [afterQuestNextScene, setAfterQuestNextScene] = useState("");
+    const { showPopup } = usePopup();
 
     useEffect(() => {
         if (loading) {
@@ -45,23 +49,77 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
         }
     };
 
+    useEffect(() => {
+        let interval: number;
+        if (!timerActive) {
+            return;
+        }
+        if (timeLeft > 0) {
+            interval = window.setInterval(() => {
+                console.log("timeLeft", timeLeft)
+                setTimeLeft((prev) => prev - 1);
+            }, 1000);
+        } else if (timeLeft === 0) {
+            showPopup("You have dared to ignore me?\nNow you're coming with me, we will be good friends.", () => {
+                setGameState(prev => ({ ...prev, currentScene: "s5b" }));
+            });
+        }
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [timerActive, timeLeft]);
+
     const handleChoiceSelect = (choice: 'a' | 'b') => {
         if (currentScene && currentScene.choices[choice]) {
             const nextSceneId = currentScene.choices[choice].nextScene;
-            setGameState(prev => ({ ...prev, currentScene: nextSceneId }));
-            if (nextSceneId === 's4') {
-                setShowMysteryForm(true);
-                //setTimerActive(true);
+            const quest = currentScene.choices[choice].quest
+
+            if (quest) {
+                console.log("Quest time!", quest);
+                setAfterQuestNextScene(nextSceneId)
+                if (quest === "MisteryForm") {
+                    setShowMysteryForm(true);
+                } else if (quest === "ScrambledCode") {
+                    setShowScrambledCode(true);
+                } else if (quest === "Countdown") {
+                    setTimerActive(true);
+                    setTimeLeft(131);
+                    setGameState(prev => ({ ...prev, currentScene: nextSceneId }));
+                }
+            } else {
+                setGameState(prev => ({ ...prev, currentScene: nextSceneId }));
             }
         }
     };
 
-    const handleMysterySubmit = (answer: string) => {
-        //setTimerActive(false);
-        const isCorrect = answer.toLowerCase() === 'hash';
-        setGameState(prev => ({ ...prev, currentScene: isCorrect ? 's5' : 'lose' }));
+
+    const handleScrambledSubmit = () => {
+        setShowScrambledCode(false);
+        showPopup("You seem to have solved the problem.\nNext time it won't be so easy.", () => {
+            setGameState(prev => ({ ...prev, currentScene: afterQuestNextScene }));
+        });
+    }
+
+    const handleMysterySubmit = (answerOk: boolean) => {
         setShowMysteryForm(false);
-        setTimeLeft(120);
+        console.log("handleMysterySubmit", answerOk, afterQuestNextScene);
+        if (answerOk) {
+            setTimerActive(false);
+            showPopup("Sadly, the answer is correct.", () => {
+                setGameState(prev => ({ ...prev, currentScene: afterQuestNextScene }));
+            });
+        } else {
+            if (afterQuestNextScene.startsWith("s5")) {
+                showPopup("That deserves a place in the depths of hell.\nYou come with me, we will be good friends.", () => {
+                    setGameState(prev => ({ ...prev, currentScene: afterQuestNextScene.replace("a", "b") }));
+                });
+            } else {
+                showPopup("You don't seem to have it clear. I may give you another chance... or not.", () => {
+                    setGameState(prev => ({ ...prev, currentScene: afterQuestNextScene.slice(0, -1) + "b" }));
+                });
+            }
+        }
     };
 
     if (!currentScene) {
@@ -77,7 +135,7 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
                 </svg>
             </div>
             <p className="text-sm text-gray-400 animate-pulse">
-                This might take a few moments...
+                It can take about 2 minutes.
             </p>
         </div>
     }
@@ -85,12 +143,17 @@ const StoryPage: React.FC<StoryPageProps> = ({ imageId, story, loading }) => {
     return (<>
         <SceneDisplay scene={currentScene} gameState={gameState} onChoiceSelect={handleChoiceSelect} />
         {showMysteryForm && (
-            <MysteryForm onSubmit={handleMysterySubmit} timeLeft={timeLeft} />
+            <MysteryForm onSubmit={handleMysterySubmit} />
         )}
+        {showScrambledCode && (
+            <ScrambledCode onSuccess={handleScrambledSubmit} />
+        )}
+        {timerActive &&
+            <div className="scary-text text-6xl text-red-500 mb-4 fixed top-10 right-20 z-50">Time left: {timeLeft}</div>
+        }
         {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
                 <div className="text-2xl text-white">Loading...</div>
-
             </div >
         )}
     </>);
