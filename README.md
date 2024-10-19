@@ -38,7 +38,7 @@ I have used AI tools intensively. Here a list
 * [suno.com](https://suno.com/song/59f92fbd-4cfa-4e77-b6d4-93229d7d9bb3) for background music
 * [gpt4-o and o1-preview](https://platform.openai.com/playground) story and code
 * [bolt.com](https://bolt.new/) initial project template
-* [v0.dev] additional code
+* [v0.dev](https://v0.dev)additional code
 
 ## Some thoughts
 
@@ -51,4 +51,4 @@ I have used AI tools intensively. Here a list
 
 ## More information
 
-[https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon](cloudinary hackaton page)
+[Cloudinary hackaton page](https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon)
