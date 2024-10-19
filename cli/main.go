@@ -21,7 +21,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s1",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks confused and a little worry;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks confused and a little worry;multiple_true",
 			"e_saturation:-20",
 			"co_rgb:3B41F6,e_colorize:10",
 			"q_auto:eco",
@@ -32,7 +32,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s2a",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind and a demonic face appears in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks focused on the investigation working with the computer;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks focused on the investigation working with the computer;multiple_true",
 			"e_saturation:-40",
 			"co_rgb:3B41F6,e_colorize:10",
 			"q_auto:eco",
@@ -43,7 +43,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s2b",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind and a angry demonic face appears in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very surprised and confused;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very surprised and confused;multiple_true",
 			"e_saturation:-40",
 			"co_rgb:0D0E2A,e_colorize:30",
 			"q_auto:eco",
@@ -54,7 +54,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s3a",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind and a demonic face appears in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very focused analyzing an issue working with a pc;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very focused analyzing an issue working with a pc;multiple_true",
 			//"e_gen_replace:from_hands if dont exists create them;to_hands working with a pc;multiple_true",
 			"e_saturation:-20",
 			"co_rgb:0D0E2A,e_colorize:30",
@@ -66,7 +66,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s3b",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind with a bunch of cables unplugged",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very angry aggresive and desesperate;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very angry aggresive and desesperate;multiple_true",
 			"e_saturation:-20",
 			"co_rgb:0D0E2A,e_colorize:30",
 			"q_auto:eco",
@@ -77,7 +77,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s4a",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a dark shadow behind",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very happy and relieved;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very happy and relieved;multiple_true",
 			"q_auto:eco",
 			"dpr_auto",
 		},
@@ -86,7 +86,7 @@ var readableTransforms = []ReadableTransform{
 		Name: "s4b",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a very dark shadow behind with a bunch of cables unplugged and a forum in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks with eyes extemely wide open and red and concentrated using a computer;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks with eyes extemely wide open and red and concentrated using a computer;multiple_true",
 			"e_saturation:-30",
 			"co_rgb:0D0E2A,e_colorize:40",
 			"q_auto:eco",
@@ -97,16 +97,16 @@ var readableTransforms = []ReadableTransform{
 		Name: "s5a",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big room",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very happy and thinking;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very happy and thinking;multiple_true",
 			"q_auto:eco",
 			"dpr_auto",
 		},
 	},
 	{
-		Name: "s5b",
+		Name: "s5d",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_In a bar with my colleages",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks looks very happy and speaking with mouth open;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks looks very happy and speaking with mouth open;multiple_true",
 			"q_auto:eco",
 			"dpr_auto",
 		},
@@ -115,17 +115,17 @@ var readableTransforms = []ReadableTransform{
 		Name: "s5c",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a very dark shadow behind with a bunch of cables unplugged and a forum in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks with a happy and relieved expresion;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks with a happy and relieved expresion;multiple_true",
 			"e_saturation:-30",
 			"q_auto:eco",
 			"dpr_auto",
 		},
 	},
 	{
-		Name: "s5d",
+		Name: "s5b",
 		Transformations: []string{
 			"e_gen_background_replace:prompt_A programmer's desk in big a dark room with a very dark shadow behind with a bunch of cables unplugged and demon laughing with the mouth open in the screen",
-			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features including gender;to_eyes mouth and cheeks expresing a lot of fear and the mouth close;multiple_true",
+			"e_gen_replace:from_Replace the facial expression in the image. Identify each face and modify only the expression keeping the rest of the features;to_eyes mouth and cheeks expresing a lot of fear and the mouth close;multiple_true",
 			"e_saturation:-40",
 			"co_rgb:000000,e_colorize:40",
 			"q_auto:eco",
