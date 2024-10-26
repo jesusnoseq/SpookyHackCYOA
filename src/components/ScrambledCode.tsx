@@ -38,8 +38,8 @@ const ScrambledCode: React.FC<ScrambledCodeProps> = ({ onSuccess }) => {
 
     return (
         <div className="absolute inset-x-0 bottom-0 bg-black bg-opacity-90 p-6">
-            <div className="max-w-md mx-auto">
-                <div className="max-w-md mx-auto mt-10 p-6 bg-gray-700 rounded-xl shadow-md">
+            <div className="max-w-xl mx-auto">
+                <div className="mx-auto mt-10 p-6 bg-gray-700 rounded-xl shadow-md">
                     <h1 className="text-2xl font-bold mb-4 text-center">Reorder the Lines of code</h1>
                     <p className="mb-4 text-gray-100 text-center">Drag and drop the lines to put them in the correct order.</p>
                     <DraggableLines initialLines={initialLines} onSuccess={handleSuccess} />

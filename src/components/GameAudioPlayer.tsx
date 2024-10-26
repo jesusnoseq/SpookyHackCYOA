@@ -8,7 +8,7 @@ export default function GameAudioPlayer() {
 
     useEffect(() => {
         const audio = new Audio('audio/Dark Code Chronicles.mp3');
-        audio.volume = 0.5;
+        audio.muted = true;
         audio.loop = true;
         audio.muted = true;
 
@@ -17,7 +17,8 @@ export default function GameAudioPlayer() {
         audio.play().catch(error => console.log("Audio playback failed:", error))
 
         return () => {
-            audio.pause()
+            audio.pause();
+            audio.volume = 0.5;
         }
     }, [])
 

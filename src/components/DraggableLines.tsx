@@ -1,4 +1,7 @@
+'use client'
+
 import React, { useState, useEffect } from 'react'
+import { GripVertical } from 'lucide-react'
 
 type Line = {
     id: string
@@ -11,24 +14,31 @@ type DraggableLinesProps = {
     onSuccess: () => void
 }
 
-const DraggableLines: React.FC<DraggableLinesProps> = ({ initialLines, onSuccess }) => {
+export default function DraggableLines({ initialLines, onSuccess }: DraggableLinesProps) {
     const [lines, setLines] = useState<Line[]>(initialLines)
+    const [draggedItem, setDraggedItem] = useState<number | null>(null)
 
     const handleDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
         e.dataTransfer.setData('text/plain', index.toString())
+        setDraggedItem(index)
     }
 
-    const handleDragOver = (e: React.DragEvent<HTMLLIElement>) => {
+    const handleDragOver = (e: React.DragEvent<HTMLLIElement>, index: number) => {
         e.preventDefault()
-    }
+        const draggedOverItem = lines[index]
+        const draggedItemContent = lines[draggedItem!]
 
-    const handleDrop = (e: React.DragEvent<HTMLLIElement>, dropIndex: number) => {
-        e.preventDefault()
-        const dragIndex = parseInt(e.dataTransfer.getData('text/plain'), 10)
+        if (draggedOverItem === draggedItemContent) return
+
         const newLines = [...lines]
-        const [reorderedItem] = newLines.splice(dragIndex, 1)
-        newLines.splice(dropIndex, 0, reorderedItem)
+        newLines[index] = draggedItemContent
+        newLines[draggedItem!] = draggedOverItem
         setLines(newLines)
+        setDraggedItem(index)
+    }
+
+    const handleDragEnd = () => {
+        setDraggedItem(null)
     }
 
     useEffect(() => {
@@ -45,16 +55,15 @@ const DraggableLines: React.FC<DraggableLinesProps> = ({ initialLines, onSuccess
                     key={line.id}
                     draggable
                     onDragStart={(e) => handleDragStart(e, index)}
-                    onDragOver={handleDragOver}
-                    onDrop={(e) => handleDrop(e, index)}
-                    className="p-4 bg-600 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-800 transition-colors cursor-move"
+                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDragEnd={handleDragEnd}
+                    className={`p-4 bg-background border border-input rounded-lg shadow-sm hover:bg-accent transition-colors cursor-move flex items-center gap-4 ${draggedItem === index ? 'opacity-50' : ''
+                        }`}
                 >
-                    <pre>{line.content}</pre>
+                    <GripVertical className="text-muted-foreground" />
+                    <pre className="flex-grow">{line.content}</pre>
                 </li>
             ))}
         </ul>
     )
 }
-
-
-export default DraggableLines;
