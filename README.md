@@ -48,6 +48,7 @@ I have used AI tools intensively. Here a list
 * The AI filters behavior changed over time. I had more acurate AI changes at first. Parameters that you can't touch, parameters that can change arbitrarily and unknowingly.
 * Cloudinary API is really nice and easy to use, but AI filters need some "finetuning" :stuck_out_tongue_winking_eye:
 * I wanted to work without any component libraries this time, I missed them but with AI tools I can make simple components really fast.
+* I thought browser differences in behaviors were a thing of the past. Not so, test the application in the same browser your client will be using.
 
 ## More information
 
