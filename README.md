@@ -4,7 +4,7 @@ A little game for cloudinary halloween hackaton. I hope you enjoy :hugs:
 
 ## You can try it for a limited time here
 
-[spooky.jesusnoseq.com](https://spooky.jesusnoseq.com/)
+[spooky-hack.jesusnoseq.com](https://spooky-hack.jesusnoseq.com/)
 
 ## What's included
 
